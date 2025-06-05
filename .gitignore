@@ -1,0 +1,21 @@
+# Rasa generated files
+models/
+.rasa/
+*.tar.gz
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments  
+venv/
+env/
+rasa_env_3.8/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

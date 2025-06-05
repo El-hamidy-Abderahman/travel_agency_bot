@@ -1,0 +1,133 @@
+version: "3.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - book_flight
+  - book_hotel
+  - select_option
+  - change_option
+  - confirm_reservation
+  - inform
+
+entities:
+  - departure_city
+  - destination_city
+  - departure_date
+  - return_date
+  - flight_class
+  - trip_type
+  - hotel_category
+  - hotel_city
+  - hotel_district
+  - number_of_people
+
+slots:
+  departure_city:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: departure_city
+
+  destination_city:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: destination_city
+
+  departure_date:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: departure_date
+
+  return_date:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: return_date
+
+  flight_class:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: flight_class
+
+  trip_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: trip_type
+
+  hotel_category:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: hotel_category
+
+  hotel_city:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: hotel_city
+
+  hotel_district:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: hotel_district
+
+  number_of_people:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: number_of_people
+
+  booking_summary:
+    type: text
+    influence_conversation: false
+    mappings: []
+
+  next_question:
+    type: text
+    influence_conversation: true
+    mappings: []
+
+responses:
+  utter_greet:
+  - text: "مرحباً! أنا المساعد الآلي لوكالة السفر. 🌟\n\nيمكنني مساعدتك في:\n• حجز الطيران ✈️\n• حجز الفنادق 🏨\n• تعديل الحجوزات 🔄\n• تأكيد الحجوزات ✅\n\nكيف يمكنني مساعدتك اليوم؟"
+
+  utter_goodbye:
+  - text: "مع السلامة! نتمنى لك رحلة سعيدة! ✈️🌟"
+  - text: "شكراً لزيارتك! إلى اللقاء! 👋"
+
+  utter_default:
+  - text: "عذراً، لم أفهم طلبك. هل يمكنك إعادة صياغته؟"
+  - text: "لم أتمكن من فهم ما تعنيه. يمكنك أن تطلب حجز رحلة أو فندق."
+
+  utter_iamabot:
+  - text: "أنا مساعد آلي ذكي لوكالة السفر، أساعدك في حجز الرحلات والفنادق. 🤖✈️"
+
+actions:
+  - action_search_flight
+  - action_search_hotel
+  - action_confirm_reservation
+  - action_update_booking
+  - action_process_user_input
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

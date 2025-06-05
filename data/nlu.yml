@@ -1,0 +1,211 @@
+version: "3.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - مرحبا
+    - السلام عليكم
+    - أهلا
+    - صباح الخير
+    - مساء الخير
+    - كيف حالك
+    - أهلا وسهلا
+
+- intent: goodbye
+  examples: |
+    - مع السلامة
+    - إلى اللقاء
+    - وداعا
+    - شكرا لك
+    - تصبح على خير
+    - شكرا والسلام عليكم
+
+- intent: affirm
+  examples: |
+    - نعم
+    - بالتأكيد
+    - موافق
+    - حسنا
+    - صحيح
+    - تمام
+    - أوافق
+    - صح
+
+- intent: deny
+  examples: |
+    - لا
+    - أبدا
+    - لست متأكدا
+    - ليس بالضبط
+    - لا أعتقد ذلك
+    - غير موافق
+
+- intent: inform
+  examples: |
+    - [مراكش](departure_city)
+    - [الرباط](departure_city)
+    - [الدار البيضاء](departure_city)
+    - [فاس](departure_city)
+    - [طنجة](departure_city)
+    - [أكادير](departure_city)
+    - [باريس](destination_city)
+    - [لندن](destination_city)
+    - [مدريد](destination_city)
+    - [روما](destination_city)
+    - [دبي](destination_city)
+    - [القاهرة](destination_city)
+    - [نيويورك](destination_city)
+    - [اسطنبول](destination_city)
+    - [15 يونيو](departure_date)
+    - [20 يوليو](departure_date)
+    - [غدا](departure_date)
+    - [الأسبوع القادم](departure_date)
+    - [الشهر القادم](departure_date)
+    - [يوم الجمعة](departure_date)
+    - [يوم السبت](departure_date)
+    - [15 أغسطس](departure_date)
+    - [20 سبتمبر](departure_date)
+    - [الأحد](departure_date)
+    - [درجة أولى](flight_class)
+    - [رجال أعمال](flight_class)
+    - [اقتصادية](flight_class)
+    - [ذهاب وإياب](trip_type)
+    - [ذهاب فقط](trip_type)
+    - [5 نجوم](hotel_category)
+    - [4 نجوم](hotel_category)
+    - [3 نجوم](hotel_category)
+    - [شخصين](number_of_people)
+    - [شخص واحد](number_of_people)
+    - [4 أشخاص](number_of_people)
+    - [3 أشخاص](number_of_people)
+    - من [مراكش](departure_city)
+    - إلى [باريس](destination_city)
+    - من [فاس](departure_city) إلى [دبي](destination_city)
+    - يوم [الجمعة](departure_date)
+    - [وسط المدينة](hotel_district)
+    - [المدينة القديمة](hotel_district)
+    - [جامع الفنا](hotel_district)
+    - في [مراكش](hotel_city)
+    - في [الرباط](hotel_city)
+    - في [الدار البيضاء](hotel_city)
+    - مراكش
+    - الرباط  
+    - الدار البيضاء
+    - فاس
+    - طنجة
+    - أكادير
+    - باريس
+    - لندن
+    - مدريد
+    - روما
+    - دبي
+    - القاهرة
+    - نيويورك
+    - اسطنبول
+    - 15 يونيو
+    - 20 يوليو
+    - غدا
+    - الأسبوع القادم
+    - الشهر القادم
+    - يوم الجمعة
+    - يوم السبت
+    - 15 أغسطس
+    - 20 سبتمبر
+    - الأحد
+    - درجة أولى
+    - رجال أعمال
+    - اقتصادية
+    - ذهاب وإياب
+    - ذهاب فقط
+
+- intent: book_flight
+  examples: |
+    - أريد حجز رحلة
+    - أبحث عن رحلة من [الرباط](departure_city) إلى [الدار البيضاء](destination_city)
+    - أريد السفر من [مراكش](departure_city) إلى [باريس](destination_city)
+    - أريد حجز طيران بتاريخ [15 يونيو](departure_date)
+    - أبحث عن رحلة [ذهاب وإياب](trip_type) من [الدار البيضاء](departure_city) إلى [لندن](destination_city) [يوم الجمعة](departure_date)
+    - أريد حجز رحلة [درجة أولى](flight_class) من [طنجة](departure_city) إلى [مدريد](destination_city)
+    - أريد السفر [ذهاب فقط](trip_type) من [الرباط](departure_city) إلى [اسطنبول](destination_city) في [20 يوليو](departure_date)
+    - هل يوجد رحلات من [فاس](departure_city) إلى [دبي](destination_city) في [الشهر القادم](departure_date)?
+    - رحلة [ذهاب وإياب](trip_type) من [أكادير](departure_city) إلى [القاهرة](destination_city) من [1 أغسطس](departure_date) إلى [15 أغسطس](return_date)
+    - أبحث عن تذكرة [رجال أعمال](flight_class) من [الدار البيضاء](departure_city) إلى [نيويورك](destination_city)
+    - أريد رحلة من [الرباط](departure_city) إلى [باريس](destination_city) من [1 يوليو](departure_date) للعودة في [15 يوليو](return_date)
+    - احجز لي رحلة من [مراكش](departure_city) إلى [لندن](destination_city) يوم [الجمعة](departure_date) والعودة [الأحد](return_date)
+    - حجز رحلة
+    - أحتاج رحلة طيران
+    - بحث عن رحلات
+    - أريد طيران
+
+- intent: book_hotel
+  examples: |
+    - أريد حجز فندق
+    - أبحث عن فندق في [مراكش](hotel_city)
+    - أريد فندق [5 نجوم](hotel_category) في [الدار البيضاء](hotel_city)
+    - هل يوجد فنادق في [المدينة القديمة](hotel_district) في [فاس](hotel_city)?
+    - أريد حجز غرفة لـ [شخصين](number_of_people) في [الرباط](hotel_city)
+    - أبحث عن فندق [3 نجوم](hotel_category) في [طنجة](hotel_city) قريب من [المدينة القديمة](hotel_district)
+    - نحتاج إقامة لـ [4 أشخاص](number_of_people) في [أكادير](hotel_city)
+    - أريد فندق [4 نجوم](hotel_category) في [مراكش](hotel_city) قريب من [جامع الفنا](hotel_district)
+    - هل لديكم فنادق في [الدار البيضاء](hotel_city) قريبة من [وسط المدينة](hotel_district)?
+    - أبحث عن غرفة لـ [شخص واحد](number_of_people) في [الرباط](hotel_city)
+    - حجز فندق
+    - أحتاج إقامة
+    - بحث عن فنادق
+
+- intent: select_option
+  examples: |
+    - أختار هذا الخيار
+    - أريد الخيار الأول
+    - الخيار الثاني يبدو جيدا
+    - سأختار هذه الرحلة
+    - هذا الفندق مناسب لي
+    - أفضل الخيار الثالث
+    - سآخذ هذا العرض
+    - هذا الحجز مناسب
+    - أوافق على هذا الاختيار
+    - أريد هذه الرحلة
+    - الخيار الأول
+    - الخيار الثاني
+    - الخيار الثالث
+    - هذا الخيار
+
+- intent: change_option
+  examples: |
+    - أريد تغيير الحجز
+    - هل يمكن تعديل موعد السفر؟
+    - أريد تغيير تاريخ المغادرة
+    - هل يمكن اختيار فندق آخر؟
+    - أريد رحلة في وقت مختلف
+    - أفضل درجة مختلفة للسفر
+    - هل يمكن تغيير عدد الأشخاص؟
+    - أريد تعديل مكان الإقامة
+    - أود تغيير نوع الرحلة
+    - تاريخ العودة غير مناسب
+    - تغيير
+    - تعديل
+    - أريد تعديل
+
+- intent: confirm_reservation
+  examples: |
+    - أؤكد الحجز
+    - موافق على الحجز
+    - نعم، أريد إتمام الحجز
+    - تأكيد الحجز من فضلك
+    - أوافق على الشروط وأريد الحجز
+    - الحجز مناسب لي
+    - أريد إتمام عملية الحجز
+    - نعم، هذا الحجز نهائي
+    - أتمم الحجز الآن
+    - موافق على التفاصيل، احجز لي
+    - تأكيد
+    - إتمام الحجز
+    - موافق أحجز
+
+- intent: bot_challenge
+  examples: |
+    - هل أنت روبوت؟
+    - هل أنت إنسان؟
+    - هل أتحدث مع روبوت؟
+    - هل أتحدث مع إنسان؟
+    - من أنت؟

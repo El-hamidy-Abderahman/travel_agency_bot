@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>وكالة السفر الذكية</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            direction: rtl; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #chat-container { 
+            width: 90%;
+            max-width: 600px; 
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        #chat-messages { 
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            font-size: 15px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        
+        .bot-message { 
+            background: white;
+            color: #2c3e50;
+            align-self: flex-start;
+            border: 1px solid #e1e8ed;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .user-message { 
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            align-self: flex-end;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e1e8ed;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        #user-input { 
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 25px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        
+        #user-input:focus {
+            border-color: #3498db;
+        }
+        
+        #send-button { 
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        #send-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+        
+        #send-button:active {
+            transform: scale(0.95);
+        }
+        
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 18px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3498db;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Scrollbar styling */
+        #chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 3px;
+        }
+        
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            #chat-container {
+                width: 95%;
+                height: 90vh;
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .header p {
+                font-size: 13px;
+            }
+            
+            .message {
+                max-width: 85%;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+            
+            .input-container {
+                padding: 15px;
+            }
+            
+            #user-input {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+            
+            #send-button {
+                width: 45px;
+                height: 45px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div class="header">
+            <h1>🌟 وكالة السفر الذكية</h1>
+            <p>مساعدك الشخصي لحجز الرحلات والفنادق</p>
+        </div>
+        
+        <div id="chat-messages">
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="اكتب رسالتك هنا...">
+            <button id="send-button">➤</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        // Generate consistent session ID
+        const sessionId = 'web_user_' + Math.random().toString(36).substr(2, 9);
+
+        // Add initial bot message
+        addBotMessage("مرحباً بك! 🌟\n\nأنا مساعدك الشخصي لحجز الرحلات والفنادق.\n\nيمكنني مساعدتك في:\n• حجز تذاكر الطيران ✈️\n• حجز الفنادق 🏨\n• تعديل حجوزاتك 🔄\n• تأكيد الحجوزات ✅\n\nكيف يمكنني خدمتك اليوم؟");
+
+        function addUserMessage(message) {
+            const div = document.createElement('div');
+            div.className = 'message user-message';
+            div.textContent = message;
+            chatMessages.insertBefore(div, typingIndicator);
+            scrollToBottom();
+        }
+
+        function addBotMessage(message) {
+            const div = document.createElement('div');
+            div.className = 'message bot-message';
+            div.textContent = message;
+            chatMessages.insertBefore(div, typingIndicator);
+            scrollToBottom();
+        }
+
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'block';
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+
+        function scrollToBottom() {
+            setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 100);
+        }
+
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Disable input and button
+            userInput.disabled = true;
+            sendButton.disabled = true;
+            
+            addUserMessage(message);
+            userInput.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Send message to Rasa server
+            fetch('http://localhost:5005/webhooks/rest/webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sender: sessionId,
+                    message: message
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideTypingIndicator();
+                
+                if (data && data.length > 0) {
+                    data.forEach((response, index) => {
+                        setTimeout(() => {
+                            addBotMessage(response.text);
+                        }, index * 500); // Stagger multiple responses
+                    });
+                } else {
+                    addBotMessage("عذراً، لم أتمكن من فهم طلبك. هل يمكنك إعادة صياغته بطريقة أخرى؟");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                hideTypingIndicator();
+                addBotMessage("عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.");
+            })
+            .finally(() => {
+                // Re-enable input and button
+                userInput.disabled = false;
+                sendButton.disabled = false;
+                userInput.focus();
+            });
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Focus on input when page loads
+        window.addEventListener('load', function() {
+            userInput.focus();
+        });
+    </script>
+</body>
+</html>

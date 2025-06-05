@@ -1,0 +1,39 @@
+# Configuration for Rasa NLU.
+language: ar
+
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: true
+    entity_recognition: true
+    intent_classification: true
+    use_masked_language_model: false
+    BILOU_flag: true
+    return_confidence: true
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    epochs: 100
+    constrain_similarities: true
+  - name: FallbackClassifier
+    threshold: 0.1
+    ambiguity_threshold: 0.05
+
+# Configuration for Rasa Core.
+policies:
+  - name: MemoizationPolicy
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true
+  - name: RulePolicy
+
+# Recipe specification
+recipe: default.v1

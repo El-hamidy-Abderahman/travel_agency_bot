@@ -1,0 +1,115 @@
+version: "3.0"
+
+stories:
+- story: complete flight booking flow with confirmation step
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: book_flight
+  - action: action_search_flight
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: select_option
+  - action: action_process_user_input
+  - intent: confirm_reservation
+  - action: action_confirm_reservation
+
+- story: flight booking with change request
+  steps:
+  - intent: book_flight
+  - action: action_search_flight
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: select_option
+  - action: action_process_user_input
+  - intent: change_option
+  - action: action_update_booking
+
+- story: hotel booking flow with confirmation step
+  steps:
+  - intent: book_hotel
+  - action: action_search_hotel
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: inform
+  - action: action_process_user_input
+  - intent: select_option
+  - action: action_process_user_input
+  - intent: confirm_reservation
+  - action: action_confirm_reservation
+
+- story: basic greeting
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: direct confirmation
+  steps:
+  - intent: confirm_reservation
+  - action: action_confirm_reservation
+
+- story: hotel booking
+  steps:
+  - intent: book_hotel
+  - action: action_search_hotel
+
+- story: change booking
+  steps:
+  - intent: change_option
+  - action: action_update_booking
+
+- story: bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- story: simple flight booking with entities
+  steps:
+  - intent: book_flight
+    entities:
+    - departure_city: "مراكش"
+    - destination_city: "باريس"
+  - action: action_search_flight
+  - intent: inform
+  - action: action_process_user_input
+  - intent: select_option
+  - action: action_process_user_input
+  - intent: confirm_reservation
+  - action: action_confirm_reservation
+
+- story: flight booking step by step with confirmation
+  steps:
+  - intent: book_flight
+  - action: action_search_flight
+  - intent: inform
+    entities:
+    - departure_city: "الرباط"
+  - action: action_process_user_input
+  - intent: inform
+    entities:
+    - destination_city: "مدريد"
+  - action: action_process_user_input
+  - intent: select_option
+  - action: action_process_user_input
+  - intent: confirm_reservation
+  - action: action_confirm_reservation
