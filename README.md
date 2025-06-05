@@ -22,7 +22,12 @@ Arabic travel agency chatbot built with Rasa framework for booking flights and h
 git clone https://github.com/El-hamidy-Abderahman/travel_agency_bot.git
 cd travel_agency_bot
 
-# Install Rasa
+# Create virtual environment (recommended to avoid dependency conflicts)
+python3 -m venv rasa_env
+source rasa_env/bin/activate  # Linux/Mac
+# or rasa_env\Scripts\activate  # Windows
+
+# Install Rasa and dependencies
 pip install rasa
 
 # Train the model
@@ -39,11 +44,14 @@ rasa run actions
 # Terminal 2: Start Rasa server
 rasa run --enable-api --cors "*"
 
-# Open index.html in your browser
+# Terminal 3: Serve the web interface
+python3 -m http.server 8000
+
+# Open http://localhost:8000 in your browser
 ```
 
 ### Web Interface
-- Open `index.html` in any modern web browser
+- Open `http://localhost:8000` in your browser after running the server
 - Start chatting in Arabic
 - Follow the bot's prompts for booking flights or hotels
 
